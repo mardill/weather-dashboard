@@ -5,16 +5,20 @@ header{
     align-items: center;
 }
 
+.container{
+    width: 100%;
+}
+
 header h1{
     color: white;
 }
 
 #left-column{
-    margin: 10px;
+    border: 2px solid red;
     
 }
 
-.city-form{
+#top-right{
     border: 2px solid blue;
 }
 
