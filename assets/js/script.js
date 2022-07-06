@@ -61,9 +61,17 @@ console.log(city)
 
     //uv index
     uvIndex(data.coord.lat, data.coord.lon)
-    
+
+    var iconCode = document.createElement("img")
+    iconCode.textContent = data.weather[0].icon
+    console.log(iconCode.textContent)
+
+    iconCode.src = `http://openweathermap.org/img/wn/${iconCode.textContent}@2x.png`;
+    console.log(iconCode.src)
+
 
     document.getElementById("city-stats").appendChild(searchedCity)
+    document.getElementById("city-stats").appendChild(iconCode)
     document.getElementById("city-stats").appendChild(temp)
     document.getElementById("city-stats").appendChild(humidity)
     document.getElementById("city-stats").appendChild(windSpeed)
@@ -85,7 +93,7 @@ function uvIndex(lat,lon){
         uvIndex.textContent = "UV Index: " + data.value
         console.log(data.value)
 
-        
+        // add uv index color styling
         function uvStyle(){
             if(data.value >= 7){
                 uvIndex.classList.add("uv-index-high")
@@ -102,16 +110,6 @@ function uvIndex(lat,lon){
     })
 }
 
-// style uv-index
-function uvStyle(){
-    if(index >= 7){
-        Element.classList.add("uv-index-high")
-    }else if(index > 3){
-        Element.classList.add("uv-index-medium")
-    }else{
-        Element.classList.add("uv-index-low")
-    }
-}
 
 // api for 5 day forecast
 function dayForecast(city){
@@ -122,12 +120,19 @@ function dayForecast(city){
         console.log(data)
 
         console.log(data.list.length)
-        
+      
         for(var i=0; i < data.list.length-7; i+=8){
-                        
+
             //date
-            var forecastDate= document.createElement("h2")
+            var forecastDate= document.createElement("h6")
             forecastDate.textContent = data.list[i].dt_txt.split(" ")[0].replace('-','/').replace('-','/')
+
+            var iconCode = document.createElement("img")
+            iconCode.textContent = data.list[i].weather[0].icon
+            console.log(iconCode.textContent)
+        
+            iconCode.src = `http://openweathermap.org/img/wn/${iconCode.textContent}@2x.png`;
+            console.log(iconCode.src)
 
             //temp
             var temp = document.createElement("p")
@@ -140,14 +145,17 @@ function dayForecast(city){
             //humidity
             var humid = document.createElement("p")
             humid.textContent = "Humidity: " + data.list[i].main.humidity
-
+ 
             
-            document.getElementById("temp1").appendChild(forecastDate)
-            document.getElementById("temp1").appendChild(temp)
-            document.getElementById("temp1").appendChild(wind)
-            document.getElementById("temp1").appendChild(humid)
-
+            document.getElementById("forecast").appendChild(forecastDate) 
+            document.getElementById("forecast").appendChild(iconCode)
+            document.getElementById("forecast").appendChild(temp)
+            document.getElementById("forecast").appendChild(wind)
+            document.getElementById("forecast").appendChild(humid)
         }
+    
+        console.log(wind)
+
 
     })
 }
@@ -173,14 +181,9 @@ function getSearches(){
             doSearch(city) 
         }) 
     } 
-    
-  
-
 }
 
 getSearches()
-
-
 
 
 
@@ -194,6 +197,6 @@ citySearch.addEventListener("click", cityInput);
 // to do
 
 // create cards for forecast
-// add in icons for forecast & current weather
+
 
 

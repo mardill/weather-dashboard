@@ -55,10 +55,8 @@ header h1{
     color: white;
 }
 
-
-
 #searchRes button{
-   margin-bottom: 20px;
+   margin-bottom: 10px;
    text-transform: capitalize;
    border: none;
    background-color: gainsboro;
@@ -67,3 +65,10 @@ header h1{
 button{
     width: 100%;
 }
+
+#forecast{
+    border: 2px solid pink;
+    display: flex;
+    flex-direction: row;
+}
+
