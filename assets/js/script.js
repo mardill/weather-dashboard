@@ -1,15 +1,3 @@
-// build search button: translate lat lon. need api?
-
-// populate city stats in top right
-
-
-// populate 5 day forcast in bottom right
-
-
-// local storage to save city searches
-    // make save city searches buttons to click to get data to populate again
-
-
 var citySearch = document.getElementById("add-city");
 var apiKey = "166a433c57516f51dfab1f7edaed8413";
 var historyArr = JSON.parse(localStorage.getItem('history')) || []
@@ -17,7 +5,7 @@ var historyArr = JSON.parse(localStorage.getItem('history')) || []
 
 
 
-
+// 
 function cityInput(event){
     event.preventDefault();
     //grab the text from the input;
@@ -115,8 +103,10 @@ function dayForecast(city){
     .then(response => response.json())
     .then(data => {
         console.log(data)
+
+        console.log(data.list.length)
         
-        for(var i=7; i; i++){
+        for(var i=0; i < data.list.length-7; i+=7){
             
             //date
             var forecastDate= document.createElement("h2")
@@ -160,12 +150,21 @@ function getSearches(){
 }
 getSearches()
 
-// create event for saved cities
+// // create event for saved cities
+// function getHistorical(city){
+
+
+// }
 
 // event listener for search button
 citySearch.addEventListener("click", cityInput);
 
 
 
-
+// to do
+// buttons for historical cities
+// fix dates for forecast
+// create cards for forecast
+// add in icons for forecast & current weather
+// change color for uv index
 
