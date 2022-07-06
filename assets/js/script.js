@@ -107,10 +107,12 @@ function dayForecast(city){
         console.log(data.list.length)
         
         for(var i=0; i < data.list.length-7; i+=7){
+
+            // var tempCard = document.createElement("col-2")
             
             //date
             var forecastDate= document.createElement("h2")
-            forecastDate.textContent = data.list[i].dt_txt
+            forecastDate.textContent = data.list[i].dt_txt.split(" ")[0].replace('-','/').replace('-','/')
 
             //temp
             var temp = document.createElement("p")
@@ -157,13 +159,13 @@ getSearches()
 // }
 
 // event listener for search button
+
 citySearch.addEventListener("click", cityInput);
 
 
 
 // to do
 // buttons for historical cities
-// fix dates for forecast
 // create cards for forecast
 // add in icons for forecast & current weather
 // change color for uv index
