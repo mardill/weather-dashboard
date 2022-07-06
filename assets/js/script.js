@@ -83,8 +83,19 @@ function uvIndex(lat,lon){
 
         var uvIndex = document.createElement("p")
         uvIndex.textContent = "UV Index: " + data.value
-        console.log(data)
+        console.log(data.value)
+
         
+        function uvStyle(){
+            if(data.value >= 7){
+                uvIndex.classList.add("uv-index-high")
+            }else if(data.value > 3){
+                uvIndex.classList.add("uv-index-medium")
+            }else{
+                uvIndex.classList.add("uv-index-low")
+            }
+        }
+        uvStyle() 
         
     
         document.getElementById("city-stats").appendChild(uvIndex)
@@ -92,7 +103,7 @@ function uvIndex(lat,lon){
 }
 
 // style uv-index
-function uvStyle(index){
+function uvStyle(){
     if(index >= 7){
         Element.classList.add("uv-index-high")
     }else if(index > 3){
@@ -184,5 +195,5 @@ citySearch.addEventListener("click", cityInput);
 
 // create cards for forecast
 // add in icons for forecast & current weather
-// change color for uv index
+
 
