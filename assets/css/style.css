@@ -14,19 +14,58 @@ header h1{
 }
 
 #left-column{
-    border: 2px solid red;
-    
+    padding-bottom: 20px;
+    height: 200px;
+    margin-right: 5px;
 }
 
 #top-right{
-    border: 2px solid blue;
+    border: 1px solid black;
+    padding-left: 15px;
+}
+
+.container{
+    padding-top: 15px;
+
 }
 
 #add-city{
     width: 100%;
 }
 
-#five-day-forcast{
-    border: 2px solid green;
+#cities{
+    border-bottom: 2px solid black;
 }
 
+#cities button{
+    margin-bottom: 20px;
+}
+
+.uv-index-low{
+    background-color: green;
+    color: white;
+}
+
+.uv-index-medium{
+    background-color: yellow;
+}
+
+.uv-index-high{
+    background-color: red;
+    color: white;
+}
+
+#forecast{
+    
+}
+
+#searchRes button{
+   margin-bottom: 20px;
+   text-transform: capitalize;
+   border: none;
+   background-color: gainsboro;
+}
+
+button{
+    width: 100%;
+}

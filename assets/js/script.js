@@ -14,19 +14,22 @@ var citySearch = document.getElementById("add-city");
 var apiKey = "166a433c57516f51dfab1f7edaed8413";
 var historyArr = JSON.parse(localStorage.getItem('history')) || []
 
-function getSearches(){
 
-}
+
+
 
 function cityInput(event){
     event.preventDefault();
-    console.log('Working')
     //grab the text from the input;
     var cityName = document.getElementById("city-search").value;
     console.log(cityName);
     searchWeather(cityName)
+    dayForecast(cityName)
 };
 
+
+
+// set up weather api and populate local weather
 function searchWeather(city){
 console.log(city)
     //make our api call
@@ -34,54 +37,47 @@ console.log(city)
     fetch(url)
     .then(response => response.json())
     .then(data => {
-console.log(history)
-//check to see if this city exists in LS 
- if(historyArr.indexOf(city) === -1){
-     historyArr.push(city);
-     console.log(historyArr)
-     localStorage.setItem('history', JSON.stringify(historyArr));
- }
 
 
+    //check to see if this city exists in local storage
+    if(historyArr.indexOf(city) === -1){
+        historyArr.push(city);
+        console.log(historyArr)
+        localStorage.setItem('history', JSON.stringify(historyArr));
+    }
 
+    console.log(data);
+    var date = new Date().toLocaleDateString();
 
-        console.log(data);
-        var date = new Date().toLocaleDateString();
+    //city name
+    var searchedCity= document.createElement("h2")
+    searchedCity.textContent = data.name + " " + date;
 
-        //city name
-        var searchedCity= document.createElement("h2")
-        searchedCity.textContent = data.name + " " + date;
+    //current temp
+    var temp = document.createElement("p")
+    temp.textContent = "Temp: " + data.main.temp
 
-        //date
+    //humidity
+    var humidity = document.createElement("p")
+    humidity.textContent = "Humidity: " + data.main.humidity
 
-        //current temp
-        var temp = document.createElement("p")
-        temp.textContent = "Temp: " + data.main.temp
+    //wind speed
+    var windSpeed = document.createElement("p")
+    windSpeed.textContent = "Wind Speed: " + data.wind.speed
 
-        //humidity
-        var humidity = document.createElement("p")
-        humidity.textContent = "Humidity: " + data.main.humidity
+    //uv index
+    uvIndex(data.coord.lat, data.coord.lon)
+    
 
-        //wind speed
-        var windSpeed = document.createElement("p")
-        windSpeed.textContent = "Wind Speed: " + data.wind.speed
-
-        //uv index
-
-        document.getElementById("city-stats").appendChild(searchedCity)
-        document.getElementById("city-stats").appendChild(temp)
-        document.getElementById("city-stats").appendChild(humidity)
-        document.getElementById("city-stats").appendChild(windSpeed)
-
-        // THEN I am presented with the city name, the date, an icon representation of weather conditions, 
-        //the temperature, the humidity, the wind speed, and the UV index
-
-        uvIndex(data.coord.lat, data.coord.lon)
-
+    document.getElementById("city-stats").appendChild(searchedCity)
+    document.getElementById("city-stats").appendChild(temp)
+    document.getElementById("city-stats").appendChild(humidity)
+    document.getElementById("city-stats").appendChild(windSpeed)
     });
 
 }
 
+// get uvi index from api
 function uvIndex(lat,lon){
     console.log(lat,lon)
 
@@ -94,11 +90,82 @@ function uvIndex(lat,lon){
         var uvIndex = document.createElement("p")
         uvIndex.textContent = "UV Index: " + data.value
         console.log(data)
-
+        
+        
+    
         document.getElementById("city-stats").appendChild(uvIndex)
     })
 }
 
+// style uv-index
+function uvStyle(index){
+    if(index >= 7){
+        Element.classList.add("uv-index-high")
+    }else if(index > 3){
+        Element.classList.add("uv-index-medium")
+    }else{
+        Element.classList.add("uv-index-low")
+    }
+}
+
+// api for 5 day forecast
+function dayForecast(city){
+    var url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        
+        for(var i=7; i; i++){
+            
+            //date
+            var forecastDate= document.createElement("h2")
+            forecastDate.textContent = data.list[i].dt_txt
+
+            //temp
+            var temp = document.createElement("p")
+            temp.textContent = "Temp: " + data.list[i].main.temp
+
+            //wind
+            var wind = document.createElement("p")
+            wind.textContent = "Wind: " + data.list[i].wind.speed + " MPH"
+
+            //humidity
+            var humid = document.createElement("p")
+            humid.textContent = "Humidity: " + data.list[i].main.humidity
+
+            document.getElementById("forecast").appendChild(forecastDate)
+            document.getElementById("forecast").appendChild(temp)
+            document.getElementById("forecast").appendChild(wind)
+            document.getElementById("forecast").appendChild(humid)
+        }
+
+    })
+}
+
+
+
+// click historical searches to get data
+function getSearches(){
+
+    var searchData =  JSON.parse(localStorage.getItem('history'))
+
+    for(i=0; i < searchData.length; i++){
+
+        var savedCity = document.createElement("button")
+        savedCity.textContent = searchData[i]
+
+        document.getElementById("searchRes").appendChild(savedCity)
+    }
+}
+getSearches()
+
+// create event for saved cities
+
+// event listener for search button
 citySearch.addEventListener("click", cityInput);
 
-// function fetchWeather(userInput)
+
+
+
+
