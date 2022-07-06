@@ -1,19 +1,25 @@
 var citySearch = document.getElementById("add-city");
 var apiKey = "166a433c57516f51dfab1f7edaed8413";
 var historyArr = JSON.parse(localStorage.getItem('history')) || []
+var searchResults = document.getElementById("searchRes");
 
 
 
 
-// 
+
+// takes value from text box and runs functions when "search" button is clicked
 function cityInput(event){
     event.preventDefault();
     //grab the text from the input;
     var cityName = document.getElementById("city-search").value;
+    doSearch(cityName)
+};
+
+function doSearch(cityName){
     console.log(cityName);
     searchWeather(cityName)
     dayForecast(cityName)
-};
+}
 
 
 
@@ -135,12 +141,13 @@ function dayForecast(city){
     })
 }
 
-
-
-// click historical searches to get data
+// create historical search buttons
 function getSearches(){
 
     var searchData =  JSON.parse(localStorage.getItem('history'))
+    if (searchData == null) {
+        return
+    }
 
     for(i=0; i < searchData.length; i++){
 
@@ -149,9 +156,23 @@ function getSearches(){
         savedCity.textContent = searchData[i] 
 
         document.getElementById("searchRes").appendChild(savedCity)
-    }
+
+        savedCity.addEventListener('click', function(event){
+            city = event.target.textContent
+            doSearch(city) 
+        }) 
+    } 
+    
+  
+
 }
+
 getSearches()
+
+
+
+
+
 
 
 
@@ -160,7 +181,7 @@ citySearch.addEventListener("click", cityInput);
 
 
 // to do
-// buttons for historical cities
+
 // create cards for forecast
 // add in icons for forecast & current weather
 // change color for uv index
