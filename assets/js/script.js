@@ -106,10 +106,8 @@ function dayForecast(city){
 
         console.log(data.list.length)
         
-        for(var i=0; i < data.list.length-7; i+=7){
-
-            // var tempCard = document.createElement("col-2")
-            
+        for(var i=0; i < data.list.length-7; i+=8){
+                        
             //date
             var forecastDate= document.createElement("h2")
             forecastDate.textContent = data.list[i].dt_txt.split(" ")[0].replace('-','/').replace('-','/')
@@ -126,10 +124,12 @@ function dayForecast(city){
             var humid = document.createElement("p")
             humid.textContent = "Humidity: " + data.list[i].main.humidity
 
-            document.getElementById("forecast").appendChild(forecastDate)
-            document.getElementById("forecast").appendChild(temp)
-            document.getElementById("forecast").appendChild(wind)
-            document.getElementById("forecast").appendChild(humid)
+            
+            document.getElementById("temp1").appendChild(forecastDate)
+            document.getElementById("temp1").appendChild(temp)
+            document.getElementById("temp1").appendChild(wind)
+            document.getElementById("temp1").appendChild(humid)
+
         }
 
     })
@@ -145,20 +145,15 @@ function getSearches(){
     for(i=0; i < searchData.length; i++){
 
         var savedCity = document.createElement("button")
-        savedCity.textContent = searchData[i]
+        savedCity.classList.add('saveCityBtn')
+        savedCity.textContent = searchData[i] 
 
         document.getElementById("searchRes").appendChild(savedCity)
     }
 }
 getSearches()
 
-// // create event for saved cities
-// function getHistorical(city){
 
-
-// }
-
-// event listener for search button
 
 citySearch.addEventListener("click", cityInput);
 
