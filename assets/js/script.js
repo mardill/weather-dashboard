@@ -123,7 +123,9 @@ function dayForecast(city){
         console.log(data)
 
         console.log(data.list.length)
-      
+    
+
+
         // get each time from array skip every 8. multiple values for single days
         for(var i=0; i < data.list.length-7; i+=8){
 

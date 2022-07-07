@@ -66,9 +66,5 @@ button{
     width: 100%;
 }
 
-#forecast{
-    border: 2px solid pink;
-    display: flex;
-    flex-direction: row;
-}
+
 
