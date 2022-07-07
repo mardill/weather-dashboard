@@ -23,7 +23,7 @@ function doSearch(cityName){
 function searchWeather(city){
 console.log(city)
     //make our api call
-    var url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`
+    var url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`
     fetch(url)
     .then(response => response.json())
     .then(data => {
