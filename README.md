@@ -20,6 +20,8 @@ This application can be used by anyone wanting realy time weather data. They can
 
 When a city is searched, that city will be able to be searched as a button without typing the name in the search bar. The forecast can also be expanded to seven days from five. 
 
+![alt text](assets/images/demo.png)
+
 ## License
 
 MIT License
