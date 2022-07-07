@@ -63,7 +63,7 @@ console.log(city)
     iconCode.textContent = data.weather[0].icon;
     console.log(iconCode.textContent);
 
-    iconCode.src = `http://openweathermap.org/img/wn/${iconCode.textContent}@2x.png`;
+    iconCode.src = `https://openweathermap.org/img/wn/${iconCode.textContent}@2x.png`;
     console.log(iconCode.src);
 
 
@@ -80,7 +80,7 @@ console.log(city)
 function uvIndex(lat,lon){
     console.log(lat,lon);
 
-    var url = `http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
+    var url = `https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
 
     fetch(url)
     .then(response => response.json())
@@ -109,7 +109,7 @@ function uvIndex(lat,lon){
 
 // api for 5 day forecast
 function dayForecast(city){
-    var url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`
+    var url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`
     fetch(url)
     .then(response => response.json())
     .then(data => {
@@ -128,7 +128,7 @@ function dayForecast(city){
             iconCode.textContent = data.list[i].weather[0].icon;
             console.log(iconCode.textContent)
         
-            iconCode.src = `http://openweathermap.org/img/wn/${iconCode.textContent}@2x.png`;
+            iconCode.src = `https://openweathermap.org/img/wn/${iconCode.textContent}@2x.png`;
             console.log(iconCode.src);
 
             //temp
