@@ -4,9 +4,6 @@ var historyArr = JSON.parse(localStorage.getItem('history')) || []
 var searchResults = document.getElementById("searchRes");
 
 
-
-
-
 // takes value from text box and runs functions when "search" button is clicked
 function cityInput(event){
     event.preventDefault();
@@ -22,8 +19,6 @@ function doSearch(cityName){
     dayForecast(cityName)
 }
 
-
-
 // set up weather api and populate local weather
 function searchWeather(city){
 console.log(city)
@@ -32,7 +27,6 @@ console.log(city)
     fetch(url)
     .then(response => response.json())
     .then(data => {
-
 
     //check to see if this city exists in local storage
     if(historyArr.indexOf(city) === -1){
@@ -113,7 +107,6 @@ function uvIndex(lat,lon){
     })
 }
 
-
 // api for 5 day forecast
 function dayForecast(city){
     var url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`
@@ -124,8 +117,6 @@ function dayForecast(city){
 
         console.log(data.list.length)
     
-
-
         // get each time from array skip every 8. multiple values for single days
         for(var i=0; i < data.list.length-7; i+=8){
 
@@ -159,10 +150,7 @@ function dayForecast(city){
             document.getElementById("forecast").appendChild(wind);
             document.getElementById("forecast").appendChild(humid);
         }
-    
         console.log(wind);
-
-
     })
 }
 
@@ -173,7 +161,6 @@ function getSearches(){
     if (searchData == null) {
         return;
     }
-
     // create button and search for store values
     for(i=0; i < searchData.length; i++){
 
@@ -195,12 +182,5 @@ getSearches();
 
 // event listener for search button
 citySearch.addEventListener("click", cityInput);
-
-
-
-// to do
-
-// create cards for forecast
-
 
 
