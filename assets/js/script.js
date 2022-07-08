@@ -120,9 +120,13 @@ function dayForecast(city){
         // get each time from array skip every 8. multiple values for single days
         for(var i=0; i < data.list.length-7; i+=8){
 
+            var card = document.createElement("div")
+            card.classList.add("cardClass")
+
             //date
             var forecastDate= document.createElement("h6");
-            forecastDate.textContent = data.list[i].dt_txt.split(" ")[0].replace('-','/').replace('-','/');
+            forecastDate.textContent = new Date(data.list[i].dt*1000).toLocaleString("en-US", {weekday: 'long'})
+            // .split(" ")[0].replace('-','/').replace('-','/');
 
             var iconCode = document.createElement("img");
             iconCode.textContent = data.list[i].weather[0].icon;
@@ -144,11 +148,12 @@ function dayForecast(city){
             humid.textContent = "Humidity: " + data.list[i].main.humidity;
  
             
-            document.getElementById("forecast").appendChild(forecastDate); 
-            document.getElementById("forecast").appendChild(iconCode);
-            document.getElementById("forecast").appendChild(temp);
-            document.getElementById("forecast").appendChild(wind);
-            document.getElementById("forecast").appendChild(humid);
+            card.appendChild(forecastDate); 
+            card.appendChild(iconCode);
+            card.appendChild(temp);
+            card.appendChild(wind);
+            card.appendChild(humid);
+            document.getElementById("card-container").appendChild(card);
         }
         console.log(wind);
     })
